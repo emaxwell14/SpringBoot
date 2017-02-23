@@ -1,8 +1,12 @@
 Notes entity is not mapped. Because its hibernate??
 Replace query with getAll in DAO
 update save note method
+
 Added custom build steps. Working with debugger
 Can I remove build step as ont need jar. Running in ide so can i just use bootrun
+
+Added schema-h2.sql. Could also try import.sql for all databases and eg. data-h2 for adding default data.
+Depends on spring.jpa.hibernate.ddl-auto being set to one of the auto update settings
 ----------------
 
 If you are using Gradle, you can run the application using ./gradlew bootRun. Or you can build the JAR file using
@@ -14,10 +18,10 @@ java -jar build/libs/gs-accessing-data-jpa-0.1.0.jar
 It is also possible to run a packaged application with remote debugging support enabled. This allows you to attach a
 debugger to your packaged application:
 
-$ java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n \
+$ java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=5005,suspend=n \
 -jar target/myproject-0.0.1-SNAPSHOT.jar
 
 -----
 
 TEST:
-java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n -jar build/libs/SpringBoot-0.0.1-SNAPSHOT.jar
+java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=5005,suspend=n -jar build/libs/SpringBoot-0.0.1-SNAPSHOT.jar
