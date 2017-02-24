@@ -26,7 +26,7 @@ public class NoteDAOImpl implements INoteDAO {
 
     public List<Note> getAll() {
     //    EntityManager manager = entityManagerFactory.createEntityManager();
-        return manager.createQuery("SELECT p FROM notes p", Note.class).getResultList();
+        return manager.createQuery("SELECT p FROM Notes p", Note.class).getResultList();
     }
 
     public Note getNoteById(int id) {

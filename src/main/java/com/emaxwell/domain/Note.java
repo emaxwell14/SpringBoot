@@ -6,8 +6,9 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by User on 22/02/2017.
  */
+
 @Entity
-@Table(name = "notes")
+@Table(name = "Notes")
 public class Note {
 
     @Id
