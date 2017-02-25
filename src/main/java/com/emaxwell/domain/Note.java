@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
  */
 
 @Entity
-@Table(name = "Notes")
+@Table(name = "notes")
 public class Note {
 
     @Id

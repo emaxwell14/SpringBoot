@@ -1,17 +1,12 @@
-Notes entity is not mapped. Because its hibernate??
-Replace query with getAll in DAO
+
+
 update save note method
 
 Added custom build steps. Working with debugger
 Can I remove build step as ont need jar. Running in ide so can i just use bootrun
 
-Added schema-h2.sql. Could also try import.sql for all databases and eg. data-h2 for adding default data.
-Depends on spring.jpa.hibernate.ddl-auto being set to one of the auto update settings
-
 Added http://localhost:8080/h2-console/
 
-Add CrudRepository to dao interface
-https://github.com/netgloo/spring-boot-samples/blob/master/spring-boot-mysql-springdatajpa-hibernate/src/main/java/netgloo/models/UserDao.java
 ----------------
 
 If you are using Gradle, you can run the application using ./gradlew bootRun. Or you can build the JAR file using
@@ -25,8 +20,3 @@ debugger to your packaged application:
 
 $ java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=5005,suspend=n \
 -jar target/myproject-0.0.1-SNAPSHOT.jar
-
------
-
-TEST:
-java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=5005,suspend=n -jar build/libs/SpringBoot-0.0.1-SNAPSHOT.jar

@@ -3,10 +3,7 @@ package com.emaxwell.controller;
 import com.emaxwell.domain.Note;
 import com.emaxwell.service.INoteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,12 +23,22 @@ public class NoteController {
 
     @RequestMapping(value="/notes/{id}", method = RequestMethod.GET)
     public Note getNote(@PathVariable("id") int id) {
-        return noteService.getNoteById(id);
+        Note note = noteService.getNoteById(id);
+        return note;
     }
 
-    @RequestMapping(value="/notes/save", method = RequestMethod.GET)
-    public Note updateNote() {
-        Note note = new Note("Note 1", "Description");
+    @RequestMapping(value="/notes/", method = RequestMethod.POST)
+    public Note createNote(@RequestBody Note note) {
         return noteService.save(note);
+    }
+
+    @RequestMapping(value="/notes/{id}", method = RequestMethod.POST)
+    public Note updateNote(@RequestBody Note note) {
+        return noteService.save(note);
+    }
+
+    @RequestMapping(value="/notes/{id}", method = RequestMethod.DELETE)
+    public void deleteNote(@PathVariable int id) {
+        noteService.deleteById(id);
     }
 }

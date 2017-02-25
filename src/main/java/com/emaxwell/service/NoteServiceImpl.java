@@ -19,15 +19,19 @@ public class NoteServiceImpl implements INoteService {
     private INoteDAO noteDAO;
 
     public List<Note> getAll() {
-        return noteDAO.getAll();
+        return (List<Note>) noteDAO.findAll();
     }
 
 
     public Note getNoteById(int id) {
-        return noteDAO.getNoteById(id);
+        return noteDAO.findOne(id);
     }
 
     public Note save(Note note) {
         return noteDAO.save(note);
+    }
+
+    public void deleteById(int id) {
+        noteDAO.delete(id);
     }
 }

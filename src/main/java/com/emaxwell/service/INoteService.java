@@ -13,4 +13,6 @@ public interface INoteService {
     Note getNoteById(int id);
 
     Note save(Note note);
+
+    void deleteById(int id);
 }
