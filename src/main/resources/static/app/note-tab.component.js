@@ -8,32 +8,51 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var note_1 = require('./note');
+var core_1 = require("@angular/core");
+var note_service_1 = require("./note.service");
+/**
+* Component for editing a note. It has twoway binding on the note name and body.
+* It is subscribed to the selected note event.
+*
+* TODO Replace two way binding of Note name. Only save on button click.
+*/
 var NoteTabComponent = (function () {
-    function NoteTabComponent() {
-        this.noteChange = new core_1.EventEmitter();
+    function NoteTabComponent(noteService) {
+        this.noteService = noteService;
     }
-    NoteTabComponent.prototype.onChange = function (note) {
-        this.noteChange.emit(note);
+    /**
+    * Subscribes to the note change event in the noteService. Clear the
+    * edit title boolean.
+    */
+    NoteTabComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        // TODO better way to get default. Last selected?
+        this.note = this.noteService.getNotes()[0];
+        // TODO this does not clear the title boolean. Need to clear it when list is
+        // selected but dont not is same scope. Tried to put in callback of subscribe
+        // but no luck
+        this.titleEdit = false;
+        this.subscription = this.noteService.noteChange.subscribe(function (item) { return _this.note = item; });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', note_1.Note)
-    ], NoteTabComponent.prototype, "note", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], NoteTabComponent.prototype, "noteChange", void 0);
-    NoteTabComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'note-tab',
-            templateUrl: 'note-tab.component.html'
-        }), 
-        __metadata('design:paramtypes', [])
-    ], NoteTabComponent);
+    NoteTabComponent.prototype.ngOnDestroy = function () {
+        this.subscription.unsubscribe();
+    };
+    /**
+    * Called when the title is clicked. The boolean shows and hides the text area
+    * for editing
+    */
+    NoteTabComponent.prototype.toggleTitleEdit = function () {
+        this.titleEdit = !this.titleEdit;
+    };
     return NoteTabComponent;
 }());
+NoteTabComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'note-tab',
+        templateUrl: 'note-tab.component.html',
+    }),
+    __metadata("design:paramtypes", [note_service_1.NoteService])
+], NoteTabComponent);
 exports.NoteTabComponent = NoteTabComponent;
 //# sourceMappingURL=note-tab.component.js.map

@@ -9,33 +9,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var note_1 = require('./note');
+var note_service_1 = require('./note.service');
+/**
+* Class for the list of notes.
+* For each note a list element is created with its name and details. When
+* clicked the current note is updated in the Note
+*/
 var NoteListComponent = (function () {
-    function NoteListComponent() {
-        this.selectedChange = new core_1.EventEmitter();
+    /**
+    * Constructor creates the NoteService
+    */
+    function NoteListComponent(noteService) {
+        this.noteService = noteService;
     }
+    /**
+    * Calls the service to update the selected note
+    */
     NoteListComponent.prototype.onSelect = function (note) {
-        this.selectedChange.emit(note);
+        this.noteService.changeSelectedNote(note);
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Array)
-    ], NoteListComponent.prototype, "notes", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', note_1.Note)
-    ], NoteListComponent.prototype, "selected", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], NoteListComponent.prototype, "selectedChange", void 0);
+    /**
+    * Get the list of notes from the service
+    */
+    NoteListComponent.prototype.ngOnInit = function () {
+        this.notes = this.noteService.getNotes();
+    };
     NoteListComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'note-list',
             templateUrl: 'note-list.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [note_service_1.NoteService])
     ], NoteListComponent);
     return NoteListComponent;
 }());
