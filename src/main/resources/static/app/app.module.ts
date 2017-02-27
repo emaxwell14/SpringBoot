@@ -7,10 +7,10 @@ import {NoteTabComponent} from './note-tab.component';
 import {NoteBookComponent} from './note-book.component';
 import {NoteService} from './note.service';
 import { FormsModule }   from '@angular/forms';
-
+import { HttpModule } from '@angular/http';
 
 @NgModule({
-  imports: [BrowserModule, FormsModule],
+  imports: [BrowserModule, FormsModule, HttpModule],
   declarations: [AppComponent, NoteListComponent, NoteTabComponent,
   NoteBookComponent],
   bootstrap: [AppComponent],

@@ -8,8 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var note_service_1 = require('./note.service');
+var core_1 = require("@angular/core");
+var note_service_1 = require("./note.service");
 /**
 * Class for the list of notes.
 * For each note a list element is created with its name and details. When
@@ -34,15 +34,15 @@ var NoteListComponent = (function () {
     NoteListComponent.prototype.ngOnInit = function () {
         this.notes = this.noteService.getNotes();
     };
-    NoteListComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'note-list',
-            templateUrl: 'note-list.component.html'
-        }), 
-        __metadata('design:paramtypes', [note_service_1.NoteService])
-    ], NoteListComponent);
     return NoteListComponent;
 }());
+NoteListComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'note-list',
+        templateUrl: 'note-list.component.html'
+    }),
+    __metadata("design:paramtypes", [note_service_1.NoteService])
+], NoteListComponent);
 exports.NoteListComponent = NoteListComponent;
 //# sourceMappingURL=note-list.component.js.map

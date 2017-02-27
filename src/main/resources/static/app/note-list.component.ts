@@ -3,6 +3,7 @@ import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core'
 import {Note} from './note'
 import {NoteTabComponent} from './note-tab.component'
 import {NoteService} from './note.service'
+import {Observable} from 'rxjs/Observable';
 
 /**
 * Class for the list of notes.
@@ -15,7 +16,7 @@ import {NoteService} from './note.service'
   templateUrl: 'note-list.component.html'
 })
 export class NoteListComponent {
-  notes: Note[];
+  notes: Observable<Note[]>;
 
   /**
   * Constructor creates the NoteService

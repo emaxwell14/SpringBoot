@@ -5,6 +5,8 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/share';
 import {Observer} from 'rxjs/Observer';
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 // TODO Replace with real server call
 export const NOTES: Note[] = [
@@ -26,7 +28,7 @@ export class NoteService {
   /**
    * Sets up event for when the selected note changes
    */
-  constructor() {
+  constructor(private http: Http) {
      // share() allows multiple subscribers
     this.noteChange = new Observable(observer =>
       this.observer = observer).share();
@@ -35,8 +37,11 @@ export class NoteService {
   /**
   * Return the list of notes for the list
   */
-  getNotes() : Note[] {
-    return NOTES;
+  getNotes() : Observable<Note[]> {
+    return this.http
+               .get(`/notes`)
+               .map(response => response.json().data as Note[]);
+    // return NOTES;
   }
   /**
    * When the selected note changes, tell subscribers

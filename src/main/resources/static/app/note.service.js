@@ -8,9 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var Observable_1 = require('rxjs/Observable');
-require('rxjs/add/operator/share');
-var core_1 = require('@angular/core');
+var Observable_1 = require("rxjs/Observable");
+require("rxjs/add/operator/share");
+var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
+require("rxjs/add/operator/map");
 // TODO Replace with real server call
 exports.NOTES = [
     { id: 11, name: 'Shopping', body: 'Fish, Chips' },
@@ -23,8 +25,9 @@ var NoteService = (function () {
     /**
      * Sets up event for when the selected note changes
      */
-    function NoteService() {
+    function NoteService(http) {
         var _this = this;
+        this.http = http;
         // share() allows multiple subscribers
         this.noteChange = new Observable_1.Observable(function (observer) {
             return _this.observer = observer;
@@ -34,7 +37,10 @@ var NoteService = (function () {
     * Return the list of notes for the list
     */
     NoteService.prototype.getNotes = function () {
-        return exports.NOTES;
+        return this.http
+            .get("/notes")
+            .map(function (response) { return response.json().data; });
+        // return NOTES;
     };
     /**
      * When the selected note changes, tell subscribers
@@ -42,11 +48,11 @@ var NoteService = (function () {
     NoteService.prototype.changeSelectedNote = function (number) {
         this.observer.next(number);
     };
-    NoteService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
-    ], NoteService);
     return NoteService;
 }());
+NoteService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Http])
+], NoteService);
 exports.NoteService = NoteService;
 //# sourceMappingURL=note.service.js.map
