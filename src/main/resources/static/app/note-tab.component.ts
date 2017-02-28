@@ -48,4 +48,9 @@ export class NoteTabComponent {
    toggleTitleEdit() {
      this.titleEdit = !this.titleEdit;
    }
+
+
+   handleChange() {
+     this.noteService.updateNote(this.note);
+   }
 }

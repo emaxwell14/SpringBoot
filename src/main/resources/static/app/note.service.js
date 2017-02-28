@@ -39,14 +39,22 @@ var NoteService = (function () {
     NoteService.prototype.getNotes = function () {
         return this.http
             .get("/notes")
-            .map(function (response) { return response.json().data; });
+            .map(function (response) { return response.json(); });
         // return NOTES;
     };
     /**
      * When the selected note changes, tell subscribers
      */
-    NoteService.prototype.changeSelectedNote = function (number) {
-        this.observer.next(number);
+    NoteService.prototype.changeSelectedNote = function (note) {
+        this.observer.next(note);
+    };
+    NoteService.prototype.updateNote = function (note) {
+        // TODO Will this update the note in the list?
+        // Not doing anything with the return type currently
+        var url = "/notes/" + note.id;
+        return this.http
+            .post(url, JSON.stringify(note))
+            .map(function (response) { return response.json().data; });
     };
     return NoteService;
 }());

@@ -15,5 +15,6 @@
 
   <textarea class="form-control" rows="20"
     [(ngModel)]="note.body"
+    (change)="handleChange()"
     ></textarea>
 </div>

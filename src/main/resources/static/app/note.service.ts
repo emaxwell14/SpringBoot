@@ -40,13 +40,25 @@ export class NoteService {
   getNotes() : Observable<Note[]> {
     return this.http
                .get(`/notes`)
-               .map(response => response.json().data as Note[]);
+               // TODO Try
+              // .map(response => response.json().data as Note[]);
+            //   .switchMap(response => this.rawSearch(response));
+               .map((response) => response.json());
     // return NOTES;
   }
   /**
    * When the selected note changes, tell subscribers
    */
-  changeSelectedNote(number) {
-    this.observer.next(number);
+  changeSelectedNote(note: Note) {
+    this.observer.next(note);
+  }
+
+  updateNote(note: Note): Observable<Note> {
+    // TODO Will this update the note in the list?
+    // Not doing anything with the return type currently
+    const url = `/notes/${note.id}`;
+    return this.http
+      .post(url, JSON.stringify(note))
+      .map(response => response.json().data as Note);
   }
 }

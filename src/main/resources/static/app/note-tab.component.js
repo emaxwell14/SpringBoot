@@ -44,6 +44,9 @@ var NoteTabComponent = (function () {
     NoteTabComponent.prototype.toggleTitleEdit = function () {
         this.titleEdit = !this.titleEdit;
     };
+    NoteTabComponent.prototype.handleChange = function () {
+        this.noteService.updateNote(this.note);
+    };
     return NoteTabComponent;
 }());
 NoteTabComponent = __decorate([
