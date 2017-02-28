@@ -27,7 +27,7 @@ public class NoteController {
         return note;
     }
 
-    @RequestMapping(value="/notes/", method = RequestMethod.POST)
+    @RequestMapping(value="/notes", method = RequestMethod.POST)
     public Note createNote(@RequestBody Note note) {
         return noteService.save(note);
     }
